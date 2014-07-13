@@ -19,10 +19,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void runExp1();
-    void runExp2();
+    void setupExp1(); void drawExp1();
+    void setupExp2(); void drawExp2();
+    void setupExp3(); void drawExp3();
     
-    ofImage img;
-    int w, h;
     int current, max;
 };
