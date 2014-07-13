@@ -18,6 +18,11 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+    
+    void runExp1();
+    void runExp2();
+    
     ofImage img;
+    int w, h;
+    int current, max;
 };
