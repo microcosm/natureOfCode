@@ -23,7 +23,7 @@ void ofApp::draw(){
 	ofDisableAlphaBlending();
 }
 
-//---------- Experiment 1
+//---------- Experiment 1: Spread across the screen
 ofImage img1;
 
 void ofApp::setupExp1(){
@@ -40,7 +40,7 @@ void ofApp::drawExp1(){
     }
 }
 
-//---------- Experiment 2
+//---------- Experiment 2: Spatially ordered
 ofImage img2; int w, h;
 
 void ofApp::setupExp2() {
@@ -57,7 +57,7 @@ void ofApp::drawExp2(){
     }
 }
 
-//---------- Experiment 3
+//---------- Experiment 3: Pre-weighted image array
 map<int, ofImage> imgs;
 ofImage noImage;
 
