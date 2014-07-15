@@ -64,21 +64,27 @@ ofImage noImage;
 void ofApp::setupExp3() {
     img2.loadImage("2.png");
     noImage.allocate(1, 1, OF_IMAGE_COLOR);
-    imgs[0] = img1;
-    imgs[1] = img1;
-    imgs[2] = img2;
-    imgs[3] = noImage;
-    imgs[4] = noImage;
-    imgs[5] = noImage;
+    imgs[0]  = img1;
+    imgs[1]  = img2;
+    imgs[2]  = img2;
+    imgs[3]  = noImage;
+    imgs[4]  = noImage;
+    imgs[5]  = noImage;
+    imgs[6]  = noImage;
+    imgs[7]  = noImage;
+    imgs[8]  = noImage;
+    imgs[9]  = noImage;
+    imgs[10] = noImage;
 }
 
 void ofApp::drawExp3(){
-	for(int i = -100; i < ofGetWidth(); i += 100) {
-        for(int j = -100; j < ofGetHeight(); j += 100) {
+	for(int i = -100; i < ofGetWidth(); i += 150) {
+        for(int j = -100; j < ofGetHeight(); j += 150) {
             int index = (int)ofRandom(imgs.size());
             imgs[index].draw(i, j);
         }
     }
+    ofSleepMillis(2000);
 }
 
 //--------------------------------------------------------------
