@@ -2,11 +2,12 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = max = 3;
+    current = max = 4;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
     setupExp3();
+    setupExp4();
 }
 
 //--------------------------------------------------------------
@@ -20,6 +21,7 @@ void ofApp::draw(){
     if(current == 1) { drawExp1(); }
     if(current == 2) { drawExp2(); }
     if(current == 3) { drawExp3(); }
+    if(current == 4) { drawExp4(); }
 	ofDisableAlphaBlending();
 }
 
@@ -41,7 +43,7 @@ void ofApp::drawExp1(){
 }
 
 //---------- Experiment 2: Spatially ordered
-ofImage img2; int w, h;
+int w, h;
 
 void ofApp::setupExp2() {
     w = img1.getWidth(); h = img1.getHeight();
@@ -58,33 +60,64 @@ void ofApp::drawExp2(){
 }
 
 //---------- Experiment 3: Pre-weighted image array
-map<int, ofImage> imgs;
-ofImage noImage;
+map<int, ofImage> imgs3;
+ofImage img2, noImage;
 
 void ofApp::setupExp3() {
     img2.loadImage("2.png");
     noImage.allocate(1, 1, OF_IMAGE_COLOR);
-    imgs[0]  = img1;
-    imgs[1]  = img2;
-    imgs[2]  = img2;
-    imgs[3]  = noImage;
-    imgs[4]  = noImage;
-    imgs[5]  = noImage;
-    imgs[6]  = noImage;
-    imgs[7]  = noImage;
-    imgs[8]  = noImage;
-    imgs[9]  = noImage;
-    imgs[10] = noImage;
+    imgs3[0]  = img1;
+    imgs3[1]  = img2;
+    imgs3[2]  = img2;
+    imgs3[3]  = noImage;
+    imgs3[4]  = noImage;
+    imgs3[5]  = noImage;
+    imgs3[6]  = noImage;
+    imgs3[7]  = noImage;
+    imgs3[8]  = noImage;
+    imgs3[9]  = noImage;
+    imgs3[10] = noImage;
 }
 
 void ofApp::drawExp3(){
 	for(int i = -100; i < ofGetWidth(); i += 150) {
         for(int j = -100; j < ofGetHeight(); j += 150) {
-            int index = (int)ofRandom(imgs.size());
-            imgs[index].draw(i, j);
+            int index = (int)ofRandom(imgs3.size());
+            imgs3[index].draw(i, j);
         }
     }
     ofSleepMillis(2000);
+}
+
+//---------- Experiment 4: More items in pre-weighted image array
+map<int, ofImage> imgs4;
+ofImage img3, img4, img5;
+
+void ofApp::setupExp4() {
+    img3.loadImage("3.png");
+    img4.loadImage("4.png");
+    img5.loadImage("5.png");
+    imgs4[0]  = img1;
+    imgs4[1]  = img2;
+    imgs4[2]  = img3;
+    imgs4[3]  = img4;
+    imgs4[4]  = img5;
+    imgs4[5]  = img1;
+    imgs4[6]  = noImage;
+    imgs4[7]  = noImage;
+    imgs4[8]  = noImage;
+    imgs4[9]  = noImage;
+    imgs4[10] = noImage;
+}
+
+void ofApp::drawExp4(){
+	for(int i = -100; i < ofGetWidth(); i += 150) {
+        for(int j = -100; j < ofGetHeight(); j += 150) {
+            int index = (int)ofRandom(imgs4.size());
+            imgs4[index].draw(i, j);
+        }
+    }
+    ofSleepMillis(200);
 }
 
 //--------------------------------------------------------------

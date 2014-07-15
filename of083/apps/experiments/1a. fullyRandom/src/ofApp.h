@@ -22,6 +22,7 @@ class ofApp : public ofBaseApp{
     void setupExp1(); void drawExp1();
     void setupExp2(); void drawExp2();
     void setupExp3(); void drawExp3();
+    void setupExp4(); void drawExp4();
     
     int current, max;
 };
