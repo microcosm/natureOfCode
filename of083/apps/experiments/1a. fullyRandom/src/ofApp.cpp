@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = 1; max = 3;
+    current = max = 3;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
