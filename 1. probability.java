@@ -60,7 +60,7 @@ Techniques to produce probablistic outcomes in code
 
 #1. Choosing from pre-weighted arrays
 -------------------------------------*/
-int[] stuff = new int[5]
+int[] stuff = new int[5];
 stuff[0] = 1;
 stuff[1] = 1;
 stuff[2] = 2;
