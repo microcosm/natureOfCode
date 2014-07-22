@@ -17,12 +17,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofEnableAlphaBlending();
     if(current == 1) { drawExp1(); }
     if(current == 2) { drawExp2(); }
     if(current == 3) { drawExp3(); }
     if(current == 4) { drawExp4(); }
-	ofDisableAlphaBlending();
 }
 
 //---------- Experiment 1:
