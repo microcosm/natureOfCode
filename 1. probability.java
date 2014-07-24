@@ -118,6 +118,8 @@ void draw() {
   float x = sd * num + mean;
 }
 
+//Oddly, contrary to my expectations, you can sometimes get results which are larger than mean + sd - outliers...
+
 /*
 Uniform vs normal vs Lévy flight
 ================================
