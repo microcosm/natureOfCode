@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxAnimatableFloat.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,26 +25,29 @@ class ofApp : public ofBaseApp{
     void setupExp3(); void drawExp3();
     void setupExp4(); void drawExp4();
     
-    int current, max;
+    int current, prev, max;
+    bool changed;
     
     float nextGaussian();
     float nextGaussian(float sd, float mean);
 };
 
-//Required to use vectors as keys in maps
-//http://www.openframeworks.cc/tutorials/c++%20concepts/002_stl_map.html
+/* This class is required to use vectors as keys in maps
+   More: http://www.openframeworks.cc/tutorials/c++%20concepts/002_stl_map.html */
+
 class vec2Key {
     
     public:
         float x, y;
     
-        vec2Key(float xValue, float yValue)
-        {
+        vec2Key(float xValue, float yValue){
+            
             x = xValue;
             y = yValue;
         }
     
         bool operator < (const vec2Key& other) const{
+            
             if ( x == other.x ) {
                 return y < other.y;
             }

@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     current = 1;
-    max = 2;
+    max = 3;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
@@ -13,20 +13,21 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    changed = prev != current;
+    prev = current;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofEnableAlphaBlending();
-    if(current == 1) { drawExp1(); }
-    if(current == 2) { drawExp2(); }
-    if(current == 3) { drawExp3(); }
-    if(current == 4) { drawExp4(); }
+    if(current == 1) { if(changed) { setupExp1(); } drawExp1(); }
+    if(current == 2) { if(changed) { setupExp2(); } drawExp2(); }
+    if(current == 3) { if(changed) { setupExp3(); } drawExp3(); }
+    if(current == 4) { if(changed) { setupExp4(); } drawExp4(); }
 	ofDisableAlphaBlending();
 }
 
-//---------- Experiment 1:
+//---------- Experiment 1: A 1D incrementing array of normalised values
 map<int, int> normalisedIntCount;
 int xMultiplier, yMultiplier, yPosition;
 
@@ -58,11 +59,12 @@ void ofApp::drawExp1(){
     }
 }
 
-//---------- Experiment 2:
+//---------- Experiment 2: A 2D incrementing array of normalised values
 map<vec2Key, int> normalisedVectorCount;
 int alphaMultiplier;
 
 void ofApp::setupExp2() {
+    
     //Init the array
     for(int i = 0; i < 500; i++) {
         for(int j = 0; j < 500; j++) {
@@ -98,13 +100,44 @@ void ofApp::drawExp2(){
     }
 }
 
-//---------- Experiment 3:
-void ofApp::setupExp3() {
+//---------- Experiment 3: Same as Experiment 1, but animated
+map<int, ofxAnimatableFloat> heights;
+int numNormals;
 
+void ofApp::setupExp3(){
+    
+    numNormals = 100;
+    
+    //Init the array
+    ofxAnimatableFloat f;
+	f.setDuration(0.8);
+    f.setCurve(EASE_OUT);
+    
+    for(int i = 0; i < numNormals; i++) {
+        heights[i] = f;
+    }
+    
+    //Figure out draw values
+    yPosition = ofGetHeight() - (ofGetHeight() / 10);
+    xMultiplier = ofGetWidth() / numNormals;
+    yMultiplier = (ofGetHeight() - (yMultiplier * 2)) / 100;
 }
 
 void ofApp::drawExp3(){
-
+    
+    //Add a new normal each frame
+    float normal = nextGaussian(numNormals * 0.1, numNormals * 0.5);
+    heights[normal].animateTo(heights[normal].val() + 1 * yMultiplier);
+    
+    //Re-draw
+    ofBackgroundGradient(ofColor::purple, ofColor::blue, OF_GRADIENT_LINEAR);
+    ofSetColor(ofColor::white);
+    float dt = 1.0f / ofGetFrameRate();
+    
+    for(int i = 0; i < numNormals; i++) {
+        heights[i].update(dt);
+        ofRect(i * xMultiplier, yPosition, xMultiplier, -heights[i].val());
+    }
 }
 
 //---------- Experiment 4:
