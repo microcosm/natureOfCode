@@ -29,3 +29,25 @@ class ofApp : public ofBaseApp{
     float nextGaussian();
     float nextGaussian(float sd, float mean);
 };
+
+//Required to use vectors as keys in maps
+//http://www.openframeworks.cc/tutorials/c++%20concepts/002_stl_map.html
+class vec2Key {
+    
+    public:
+        float x, y;
+    
+        vec2Key(float xValue, float yValue)
+        {
+            x = xValue;
+            y = yValue;
+        }
+    
+        bool operator < (const vec2Key& other) const{
+            if ( x == other.x ) {
+                return y < other.y;
+            }
+        
+            return x < other.x;
+        }
+};

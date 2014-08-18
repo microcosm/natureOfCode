@@ -2,7 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = max = 1;
+    current = 1;
+    max = 2;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
@@ -26,45 +27,75 @@ void ofApp::draw(){
 }
 
 //---------- Experiment 1:
-map<int, int> normals;
+map<int, int> normalisedIntCount;
 int xMultiplier, yMultiplier, yPosition;
 
 void ofApp::setupExp1(){
     
     //Init the array
     for(int i = 0; i < 500; i++) {
-        normals[i] = 0;
+        normalisedIntCount[i] = 0;
     }
     
     //Figure out draw values
     yPosition = ofGetHeight() - (ofGetHeight() / 10);
     xMultiplier = ofGetWidth() / 500;
     yMultiplier = (ofGetHeight() - (yMultiplier * 2)) / 300;
-    cout << yMultiplier << "\n";
 }
 
 void ofApp::drawExp1(){
     
     //Add a new normal each frame
     float normal = nextGaussian(50, 250);
-    normals[normal] += yMultiplier;
+    normalisedIntCount[normal] += 1;
     
     //Re-draw
     ofBackgroundGradient(ofColor::mediumAquaMarine, ofColor::maroon, OF_GRADIENT_LINEAR);
     ofSetColor(ofColor::white);
     
     for(int i = 0; i < 500; i++) {
-        ofRect(i * xMultiplier, yPosition, xMultiplier, -normals[i]);
+        ofRect(i * xMultiplier, yPosition, xMultiplier, -normalisedIntCount[i] * yMultiplier);
     }
 }
 
 //---------- Experiment 2:
-void ofApp::setupExp2() {
+map<vec2Key, int> normalisedVectorCount;
+int alphaMultiplier;
 
+void ofApp::setupExp2() {
+    //Init the array
+    for(int i = 0; i < 500; i++) {
+        for(int j = 0; j < 500; j++) {
+            normalisedVectorCount[vec2Key(i,j)] = 0;
+        }
+    }
+    
+    //Assign drawing values
+    alphaMultiplier = 25;
+    xMultiplier = ofGetWidth() / 500;
+    yMultiplier = ofGetHeight() / 500;
 }
 
 void ofApp::drawExp2(){
-
+    
+    //Add new normals each frame
+    for(int i = 0; i < 500; i++){
+        int normalX = nextGaussian(50, 250);
+        int normalY = nextGaussian(50, 250);
+        normalisedVectorCount[vec2Key(normalX, normalY)] += 1;
+    }
+        
+    //Re-draw
+    ofBackgroundGradient(ofColor::maroon, ofColor::mediumAquaMarine, OF_GRADIENT_CIRCULAR);
+    
+    for(int i = 0; i < 500; i++) {
+        for(int j = 0; j < 500; j++) {
+            vec2Key vector = vec2Key(i, j);
+            int alpha = ofClamp(normalisedVectorCount[vector] * alphaMultiplier, 0, 255);
+            ofSetColor(ofColor(255, 255, 255, alpha));
+            ofRect(i * xMultiplier, j * yMultiplier, xMultiplier, yMultiplier);
+        }
+    }
 }
 
 //---------- Experiment 3:
