@@ -123,8 +123,7 @@ void draw() {
 /*
 Uniform vs normal vs Lévy flight
 ================================
-
-We could implement a Lévy flight by saying that there is a 1% chance of the walker taking a large step.
+A Lévy flight is a random walk in which the step-lengths have a probability distribution that is heavy-tailed. We could implement a Lévy flight by saying that there is a 1% chance of the walker taking a large step.
 */
 //A 1% chance of taking a large step
 float r = random(1);
