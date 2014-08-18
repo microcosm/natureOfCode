@@ -2,8 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = 1;
-    max = 3;
+    current = max = 4;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
@@ -130,7 +129,7 @@ void ofApp::drawExp3(){
     heights[normal].animateTo(heights[normal].val() + 1 * yMultiplier);
     
     //Re-draw
-    ofBackgroundGradient(ofColor::purple, ofColor::blue, OF_GRADIENT_LINEAR);
+    ofBackgroundGradient(ofColor::purple, ofColor::black, OF_GRADIENT_LINEAR);
     ofSetColor(ofColor::white);
     float dt = 1.0f / ofGetFrameRate();
     
@@ -140,13 +139,55 @@ void ofApp::drawExp3(){
     }
 }
 
-//---------- Experiment 4:
-void ofApp::setupExp4() {
+//---------- Experiment 4: Same as Experiment 2, but animated
+map<vec2Key, ofxAnimatableFloat> alphas;
+
+void ofApp::setupExp4(){
     
+    numNormals = 100;
+    
+    //Init the array
+    ofxAnimatableFloat f;
+	f.setDuration(0.8);
+    f.setCurve(EASE_OUT);
+    
+    for(int i = 0; i < numNormals; i++) {
+        for(int j = 0; j < numNormals; j++) {
+            alphas[vec2Key(i,j)] = f;
+        }
+    }
+    
+    //Assign drawing values
+    alphaMultiplier = 5;
+    xMultiplier = ofGetWidth() / numNormals;
+    yMultiplier = ofGetHeight() / numNormals;
 }
 
 void ofApp::drawExp4(){
-
+    
+    //Add new normals each frame
+    for(int i = 0; i < numNormals; i++){
+        int normalX = nextGaussian(numNormals * 0.1, numNormals * 0.5);
+        int normalY = nextGaussian(numNormals * 0.1, numNormals * 0.5);
+        vec2Key vector = vec2Key(normalX, normalY);
+        alphas[vector].animateTo(alphas[vector].val() + 1 * alphaMultiplier);
+        cout << "[" << normalX << " " << normalY << "] " << alphas[vector].val() << " " << alphas[vector].val() + 1 * alphaMultiplier << "\n";
+    }
+    
+    //Re-draw
+    ofBackgroundGradient(ofColor::maroon, ofColor::black, OF_GRADIENT_CIRCULAR);
+    float dt = 1.0f / ofGetFrameRate();
+    
+    for(int i = 0; i < numNormals; i++) {
+        for(int j = 0; j < numNormals; j++) {
+            vec2Key vector = vec2Key(i, j);
+            alphas[vector].update(dt);
+            
+            int alpha = ofClamp(alphas[vector].val(), 0, 255);
+            ofSetColor(ofColor(255, 255, 255, alpha));
+            ofRect(i * xMultiplier, j * yMultiplier, xMultiplier, yMultiplier);
+        }
+    }
 }
 
 //Adapted from andyr0id/ofxGaussian
