@@ -5,31 +5,31 @@ Random Walker
 =============
 */
 // Equal chance to move left, right, up, or down.
-    if (int(random(4)) == 0) {
-      x++;
-    } else if (choice == 1) {
-      x--;
-    } else if (choice == 2) {
-      y++;
-    } else {
-      y--;
-    }
+if (int(random(4)) == 0) {
+  x++;
+} else if (choice == 1) {
+  x--;
+} else if (choice == 2) {
+  y++;
+} else {
+  y--;
+}
 
 // Now add in diagonals + possibility of staying the same:
-  void step() {
-    int stepx = int(random(3))-1; //-1, 0, or 1
-    int stepy = int(random(3))-1;
-    x += stepx;
-    y += stepy;
-  }
+void step() {
+  int stepx = int(random(3))-1; //-1, 0, or 1
+  int stepy = int(random(3))-1;
+  x += stepx;
+  y += stepy;
+}
 
 // Same, but with floating point numbers
- void step() {
-    float stepx = random(-1, 1); //-1.0 <> 1.0
-    float stepy = random(-1, 1);
-    x += stepx;
-    y += stepy;
-  }
+void step() {
+  float stepx = random(-1, 1); //-1.0 <> 1.0
+  float stepy = random(-1, 1);
+  x += stepx;
+  y += stepy;
+}
 
 /*
 Probability’s basic principles
