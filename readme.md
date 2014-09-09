@@ -22,4 +22,4 @@ At the root there is a .java file for each chapter in the book, with what I thou
 
 openFrameworks forces you to use a certain directory structure, so I just included the entire openFrameworks 0.8.3 distribution. You should be able to easily clone the repo and launch the examples, if you own a Mac with Xcode anyway.
 
-To see the oF code, navigate to [of083/apps/experiments](https://github.com/microcosm/natureOfCode/tree/master/of083/apps/experiments), or just use the 'experiments' symlink to jump straight in there.
+To see the oF code, navigate to [of083/apps/experiments](of083/apps/experiments), or just use the 'experiments' symlink to jump straight in there.
