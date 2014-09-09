@@ -2,6 +2,8 @@ Nature of Code / openFrameworks
 ===============================
 Concepts and ideas from Daniel Shiffman's amazing book, written in openFrameworks.
 
+![The book](book.jpg)
+
 [Buy the book](http://natureofcode.com/) or [read it online](http://natureofcode.com/).
 
 Is this repo a port of the examples to oF?
