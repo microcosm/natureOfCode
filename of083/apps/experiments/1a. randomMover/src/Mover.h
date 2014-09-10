@@ -6,6 +6,7 @@ class Mover {
     
 public:
     void setup();
+    void setLocation(float x, float y);
     void update();
     void draw();
     void checkEdges();

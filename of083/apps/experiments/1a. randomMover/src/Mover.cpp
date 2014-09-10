@@ -8,11 +8,16 @@ void Mover::setup() {
     velocity.set(ofRandom(20) - 10, ofRandom(20) - 10);
 }
 
+void Mover::setLocation(float x, float y) {
+    location.set(x, y);
+}
+
 void Mover::update() {
     location += velocity;
     if(ofGetFrameNum() % 25 == 0) {
         velocity.set(ofRandom(20) - 10, ofRandom(20) - 10);
     }
+    checkEdges();
 }
 
 void Mover::draw() {
