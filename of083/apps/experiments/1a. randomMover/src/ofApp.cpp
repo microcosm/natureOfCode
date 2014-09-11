@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = last = max = 3;
+    current = last = max = 4;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
@@ -100,12 +100,43 @@ void ofApp::drawExp3() {
 }
 
 //---------- Experiment 4:
+vector <VideoMover> videos;
+int velocityMultiplier, numVideosToShow, maxVideosToShow = 10;
+
 void ofApp::setupExp4() {
+    ofBackground(ofColor::black);
+    ofSetBackgroundAuto(false);
     
+    videos.clear();
+    velocityMultiplier = 10;
+    numVideosToShow = 1;
+    
+    for(int i = 0; i < maxVideosToShow; i++) {
+        pushNewVideo();
+    }
 }
 
 void ofApp::drawExp4() {
+    if(ofGetFrameNum() > 1 && ofGetFrameNum() % 300 == 0) {
+        numVideosToShow++;
+    }
+    
+    if(numVideosToShow > maxVideosToShow) {
+        numVideosToShow = 1;
+    }
+    
+    for(int i = 0; i < numVideosToShow; i++) {
+        videos.at(i).update();
+        videos.at(i).draw();
+    }
+}
 
+void ofApp::pushNewVideo() {
+    VideoMover video;
+    video.load("Ssangyong.mp4");
+    video.setup();
+    video.setVelocityMultiplier(velocityMultiplier += 10);
+    videos.push_back(video);
 }
 
 //--------------------------------------------------------------
