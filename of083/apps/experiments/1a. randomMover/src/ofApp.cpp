@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = last = max = 2;
+    current = last = max = 3;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
@@ -31,31 +31,28 @@ void ofApp::draw(){
 }
 
 //---------- Experiment 1:
-Mover mover;
+CircleMover circle;
 
 void ofApp::setupExp1() {
     ofBackground(ofColor::black);
-    //ofClear(ofColor::black);
     ofSetBackgroundAuto(false);
-    mover.setup();
+    circle.setup();
 }
 
 void ofApp::drawExp1() {
-    mover.update();
-    mover.draw();
+    circle.update();
+    circle.draw();
 }
 
 //---------- Experiment 2:
-vector <Mover> movers; //A little confusing in this context, but a vector is just a C++ array
+vector <CircleMover> circles; //A little confusing in this context, but a vector is just a C++ array
 
 void ofApp::setupExp2() {
     ofBackground(ofColor::black);
-    ofClear(ofColor::black);
     ofSetBackgroundAuto(false);
+    circles.clear();
     
-    movers.clear();
-    
-    Mover mover;
+    CircleMover circle;
     float x, y, xincrement, yincrement;
     int xcount, ycount;
     
@@ -69,26 +66,37 @@ void ofApp::setupExp2() {
             x = xincrement * xi;
             y = yincrement * yi;
             
-            mover.setLocation(x, y);
-            movers.push_back(mover);
+            circle.setup();
+            circle.setLocation(x, y);
+            circles.push_back(circle);
         }
     }
 }
 
 void ofApp::drawExp2() {
-    for(int i = 0; i < movers.size(); i++) {
-        movers.at(i).update();
-        movers.at(i).draw();
+    for(int i = 0; i < circles.size(); i++) {
+        circles.at(i).update();
+        circles.at(i).draw();
     }
 }
 
 //---------- Experiment 3:
-void ofApp::setupExp3() {
+VideoMover video;
 
+void ofApp::setupExp3() {
+    ofBackground(ofColor::black);
+    ofSetBackgroundAuto(false);
+    ofSetColor(ofColor::white);
+    
+    video.load("Ssangyong.mp4");
+    video.setup();
+    video.setVelocityMultiplier(10);
+    video.setChangeFreq(120);
 }
 
 void ofApp::drawExp3() {
-
+    video.update();
+    video.draw();
 }
 
 //---------- Experiment 4:

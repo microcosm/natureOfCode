@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8413CAE019BFAF8900FB975F /* Mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8413CADE19BFAF8900FB975F /* Mover.cpp */; };
+		84262FB119C0E91600C7EEE1 /* CircleMover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84262FAF19C0E91600C7EEE1 /* CircleMover.cpp */; };
+		84262FB419C0ED2000C7EEE1 /* VideoMover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84262FB219C0ED2000C7EEE1 /* VideoMover.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -62,6 +64,10 @@
 /* Begin PBXFileReference section */
 		8413CADE19BFAF8900FB975F /* Mover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mover.cpp; sourceTree = "<group>"; };
 		8413CADF19BFAF8900FB975F /* Mover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mover.h; sourceTree = "<group>"; };
+		84262FAF19C0E91600C7EEE1 /* CircleMover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleMover.cpp; sourceTree = "<group>"; };
+		84262FB019C0E91600C7EEE1 /* CircleMover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleMover.h; sourceTree = "<group>"; };
+		84262FB219C0ED2000C7EEE1 /* VideoMover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoMover.cpp; sourceTree = "<group>"; };
+		84262FB319C0ED2000C7EEE1 /* VideoMover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMover.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -114,6 +120,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84262FAE19C0E88500C7EEE1 /* Movers */ = {
+			isa = PBXGroup;
+			children = (
+				8413CADE19BFAF8900FB975F /* Mover.cpp */,
+				8413CADF19BFAF8900FB975F /* Mover.h */,
+				84262FAF19C0E91600C7EEE1 /* CircleMover.cpp */,
+				84262FB019C0E91600C7EEE1 /* CircleMover.h */,
+				84262FB219C0ED2000C7EEE1 /* VideoMover.cpp */,
+				84262FB319C0ED2000C7EEE1 /* VideoMover.h */,
+			);
+			path = Movers;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,11 +202,10 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				84262FAE19C0E88500C7EEE1 /* Movers */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				8413CADE19BFAF8900FB975F /* Mover.cpp */,
-				8413CADF19BFAF8900FB975F /* Mover.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -288,9 +306,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84262FB419C0ED2000C7EEE1 /* VideoMover.cpp in Sources */,
 				8413CAE019BFAF8900FB975F /* Mover.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				84262FB119C0E91600C7EEE1 /* CircleMover.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

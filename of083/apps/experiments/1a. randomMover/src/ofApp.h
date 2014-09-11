@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "Mover.h"
+#include "CircleMover.h"
+#include "VideoMover.h"
 
 class ofApp : public ofBaseApp{
 
@@ -27,4 +29,6 @@ class ofApp : public ofBaseApp{
     void setupExp4(); void drawExp4();
     
     int current, last, max;
+    
+    void pushNewVideo();
 };
