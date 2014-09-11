@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = max = 1;
+    current = last = max = 1;
     ofToggleFullscreen();
     setupExp1();
     setupExp2();
@@ -12,7 +12,14 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    if(changed()) {
+        if(current == 1) { setupExp1(); }
+        if(current == 2) { setupExp2(); }
+        if(current == 3) { setupExp3(); }
+        if(current == 4) { setupExp4(); }
+    }
+    
+    last = current;
 }
 
 //--------------------------------------------------------------
@@ -24,30 +31,30 @@ void ofApp::draw(){
 }
 
 //---------- Experiment 1:
-void ofApp::setupExp1(){
-
+void ofApp::setupExp1() {
+    
 }
 
-void ofApp::drawExp1(){
-
+void ofApp::drawExp1() {
+    
 }
 
 //---------- Experiment 2:
 void ofApp::setupExp2() {
-
+    
 }
 
-void ofApp::drawExp2(){
-
+void ofApp::drawExp2() {
+    
 }
 
 //---------- Experiment 3:
 void ofApp::setupExp3() {
-
+    
 }
 
-void ofApp::drawExp3(){
-
+void ofApp::drawExp3() {
+    
 }
 
 //---------- Experiment 4:
@@ -55,14 +62,19 @@ void ofApp::setupExp4() {
     
 }
 
-void ofApp::drawExp4(){
-
+void ofApp::drawExp4() {
+    
 }
 
 //--------------------------------------------------------------
+bool ofApp::changed() {
+    return current != last;
+}
+
 void ofApp::keyPressed(int key){
-    if(key == 'n')
-    {
+    if(key == 'n') {
+        last = current;
+        
         if(current < max){
             current++;
         } else {
@@ -73,40 +85,40 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::dragEvent(ofDragInfo dragInfo){
+    
 }
