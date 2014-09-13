@@ -1,17 +1,15 @@
 #include "Mover.h"
 
 void Mover::setup() {
-    location.set(ofRandomWidth(), ofRandomHeight());
-    setVelocityMultiplier(20);
-    setChangeFreq(25);
-    newRandomVelocity();
+    topspeed = 1000;
+    setLocation(ofGetWidth() * 0.5, ofGetHeight() * 0.5);
+    setAcceleration(0, 0.02);
 }
 
 void Mover::update() {
+    velocity += acceleration;
+    velocity.limit(topspeed);
     location += velocity;
-    if(ofGetFrameNum() % changeFreq == 0) {
-        newRandomVelocity();
-    }
     checkEdges();
 }
 
@@ -23,12 +21,8 @@ void Mover::setLocation(float x, float y) {
     location.set(x, y);
 }
 
-void Mover::setVelocityMultiplier(int mult) {
-    velocityMultiplier = mult;
-}
-
-void Mover::setChangeFreq(int frames) {
-    changeFreq = frames;
+void Mover::setAcceleration(float x, float y) {
+    acceleration.set(x, y);
 }
 
 void Mover::checkEdges() {
@@ -43,10 +37,4 @@ void Mover::checkEdges() {
     } else if (location.y < 0) {
         location.y = ofGetHeight();
     }
-}
-
-void Mover::newRandomVelocity() {
-    int randomX = ofRandom(velocityMultiplier) - velocityMultiplier * 0.5;
-    int randomY = ofRandom(velocityMultiplier) - velocityMultiplier * 0.5;
-    velocity.set(randomX, randomY);
 }

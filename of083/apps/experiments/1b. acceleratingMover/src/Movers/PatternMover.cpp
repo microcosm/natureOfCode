@@ -27,9 +27,11 @@ void PatternMover::update() {
 }
 
 void PatternMover::draw() {
+    ofPushMatrix();
     Mover::draw();
     
     biggerCircle.draw();
     bigCircle.draw();
     smallCircle.draw();
+    ofPopMatrix();
 }

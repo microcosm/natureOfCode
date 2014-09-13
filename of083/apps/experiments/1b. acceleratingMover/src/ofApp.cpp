@@ -31,15 +31,29 @@ void ofApp::draw(){
 }
 
 //---------- Experiment 1:
-PatternMover patternMover;
+vector <PatternMover> patternMovers;
+int numMovers = 8;
+float x, y;
 
 void ofApp::setupExp1() {
-    patternMover.setup();
+    for(int i = 0; i < numMovers; i++) {
+        x = ofGetWidth() * (1.0 / (numMovers+1)) * (i+1);
+        y = ofGetHeight() * 0.5;
+        
+        PatternMover patternMover;
+        patternMover.setup();
+        patternMover.setLocation(x, y);
+        patternMover.setAcceleration(0, 0.02 * (i+1));
+        
+        patternMovers.push_back(patternMover);
+    }
 }
 
 void ofApp::drawExp1() {
-    patternMover.update();
-    patternMover.draw();
+    for(int i = 0; i < numMovers; i++) {
+        patternMovers.at(i).update();
+        patternMovers.at(i).draw();
+    }
 }
 
 //---------- Experiment 2:

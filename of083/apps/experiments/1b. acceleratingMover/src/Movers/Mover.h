@@ -10,14 +10,11 @@ public:
     void draw();
     
     void setLocation(float x, float y);
-    void setVelocityMultiplier(int mult);
-    void setChangeFreq(int frames);
+    void setAcceleration(float x, float y);
     
 protected:
     void checkEdges();
-    void newRandomVelocity();
     
-    ofVec2f location, velocity;
-    int velocityMultiplier;
-    int changeFreq;
+    ofVec2f location, velocity, acceleration;
+    int topspeed;
 };
