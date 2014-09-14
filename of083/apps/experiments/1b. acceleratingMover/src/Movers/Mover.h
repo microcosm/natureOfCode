@@ -9,6 +9,7 @@ public:
     void update();
     void draw();
     
+    void setTopSpeed(int speed);
     void setLocation(float x, float y);
     void setAcceleration(float x, float y);
     

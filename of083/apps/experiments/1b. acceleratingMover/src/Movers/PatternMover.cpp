@@ -3,15 +3,15 @@
 void PatternMover::setup() {
     Mover::setup();
     
-    smallCircle.setSize(ofGetWidth() * 0.08);
+    smallCircle.setSize(ofGetWidth() * 0.08 * size);
     smallCircle.setNumLines(2);
     smallCircle.setup();
     
-    bigCircle.setSize(ofGetWidth() * 0.084);
+    bigCircle.setSize(ofGetWidth() * 0.084 * size);
     bigCircle.setNumLines(180);
     bigCircle.setup();
     
-    biggerCircle.setSize(ofGetWidth() * 0.1);
+    biggerCircle.setSize(ofGetWidth() * 0.1 * size);
     biggerCircle.setNumLines(4);
     biggerCircle.setup();
     
@@ -28,10 +28,15 @@ void PatternMover::update() {
 
 void PatternMover::draw() {
     ofPushMatrix();
-    Mover::draw();
     
+    Mover::draw();
     biggerCircle.draw();
     bigCircle.draw();
     smallCircle.draw();
+    
     ofPopMatrix();
+}
+
+void PatternMover::setSize(float _size) {
+    size = _size;
 }

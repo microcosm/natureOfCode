@@ -17,6 +17,10 @@ void Mover::draw() {
     ofTranslate(location.x, location.y);
 }
 
+void Mover::setTopSpeed(int speed) {
+    topspeed = speed;
+}
+
 void Mover::setLocation(float x, float y) {
     location.set(x, y);
 }
