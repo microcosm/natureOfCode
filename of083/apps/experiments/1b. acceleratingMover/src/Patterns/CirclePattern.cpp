@@ -11,6 +11,8 @@ void CirclePattern::setup() {
     }
 #endif
     
+    setTransparent(false);
+    
     ofSetCircleResolution(halfFboSize);
     ofEnableSmoothing();
     
@@ -24,6 +26,7 @@ void CirclePattern::update() {
 }
 
 void CirclePattern::draw() {
+    ofSetColor(255); //This wipes out the influence of previous ofSetColor() calls
     maskingShader.begin();
     maskingShader.setUniformTexture("maskTex", maskFbo.getTextureReference(), 1);
     maskedFbo.draw(0, 0);
@@ -35,20 +38,24 @@ void CirclePattern::setSize(int _size) {
     halfFboSize = fboSize * 0.5;
 }
 
+void CirclePattern::setTransparent(bool _transparent) {
+    transparent = _transparent;
+}
+
 void CirclePattern::setNumLines(int _numLines) {
     numLines = _numLines;
 }
 
 void CirclePattern::init(ofFbo &fbo) {
     fbo.allocate(fboSize, fboSize, GL_RGBA, 4);
-    fbo.begin();
-    ofClear(0, 0, 0, 255);
-    fbo.end();
+    /*fbo.begin();
+    ofClear(255, 255, 255, alpha);
+    fbo.end();*/
 }
 
 void CirclePattern::drawMaskedFbo() {
     maskedFbo.begin();
-    ofBackground(ofColor::black);
+    clearFbo();
     ofSetColor(ofColor::white);
     for(int i = 0; i < numLines; i++) {
         ofLine(ofRandom(fboSize), ofRandom(fboSize), ofRandom(fboSize), ofRandom(fboSize));
@@ -58,9 +65,17 @@ void CirclePattern::drawMaskedFbo() {
 
 void CirclePattern::drawMaskFbo() {
     maskFbo.begin();
-    ofBackground(ofColor::black);
+    ofClear(ofColor::black);
     ofSetColor(ofColor::white);
     
     ofCircle(halfFboSize, halfFboSize, halfFboSize);
     maskFbo.end();
+}
+
+void CirclePattern::clearFbo() {
+    if(transparent) {
+        ofClear(255, 255, 255, 0);
+    } else {
+        ofClear(0, 0, 0, 255);
+    }
 }

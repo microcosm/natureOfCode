@@ -36,6 +36,7 @@ int numConstantAccelerators;
 float x, y;
 
 void ofApp::setupExp1() {
+    ofBackground(ofColor::black);
     numConstantAccelerators = 8;
     constantAccelerators.clear();
     
@@ -66,6 +67,7 @@ int numRandomAccelerators;
 float mult;
 
 void ofApp::setupExp2() {
+    ofBackground(ofColor::black);
     numRandomAccelerators = 5;
     randomAccelerators.clear();
     

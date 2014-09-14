@@ -7,12 +7,8 @@ varying vec2 texCoordVarying;
 
 void main()
 {
-    // Get color value from
     vec3 src = texture2DRect(tex0, texCoordVarying).rgb;
-
-    // Get alpha value
+    float src_alpha = texture2DRect(tex0, texCoordVarying).a;
     float mask = texture2DRect(maskTex, texCoordVarying).r;
-
-    // Set
-    gl_FragColor = vec4(src , mask);
+    gl_FragColor = vec4(src, mask * src_alpha);
 }

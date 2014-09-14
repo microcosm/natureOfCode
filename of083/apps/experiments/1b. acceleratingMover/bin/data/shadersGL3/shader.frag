@@ -12,12 +12,8 @@ out vec4 outputColor;
 
 void main()
 {
-    // get rgb from tex0
     vec3 src = texture(tex0, texCoordVarying).rgb;
-
-    // get alpha from mask
+    float src_alpha = texture(tex0, texCoordVarying).a;
     float mask = texture(maskTex, texCoordVarying).r;
-    
-    //mix the rgb from tex0 with the alpha of the mask
-    outputColor = vec4(src , mask);
+    outputColor = vec4(src, mask * src_alpha);
 }

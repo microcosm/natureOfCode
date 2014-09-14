@@ -14,6 +14,7 @@ void PatternMover::setup() {
     biggerCircle.setSize(ofGetWidth() * 0.1 * size);
     biggerCircle.setNumLines(4);
     biggerCircle.setup();
+    biggerCircle.setTransparent(true);
     
     ofSetRectMode(OF_RECTMODE_CENTER);
 }
