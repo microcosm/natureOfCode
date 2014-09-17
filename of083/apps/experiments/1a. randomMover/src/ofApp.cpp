@@ -2,25 +2,22 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = last = 1;
-    max = 4;
-    ofToggleFullscreen();
-    setupExp1();
-    setupExp2();
-    setupExp3();
-    setupExp4();
+    interface.setup();
+    interface.setMax(4);
+    interface.enableBackground();
+    current = interface.getCurrent();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if(changed()) {
+    if(interface.changed()) {
+        current = interface.getCurrent();
         if(current == 1) { setupExp1(); }
         if(current == 2) { setupExp2(); }
         if(current == 3) { setupExp3(); }
         if(current == 4) { setupExp4(); }
     }
-    
-    last = current;
+    interface.update();
 }
 
 //--------------------------------------------------------------
@@ -29,6 +26,7 @@ void ofApp::draw(){
     if(current == 2) { drawExp2(); }
     if(current == 3) { drawExp3(); }
     if(current == 4) { drawExp4(); }
+    interface.draw();
 }
 
 //---------- Experiment 1:
@@ -141,20 +139,8 @@ void ofApp::pushNewVideo() {
 }
 
 //--------------------------------------------------------------
-bool ofApp::changed() {
-    return current != last;
-}
-
 void ofApp::keyPressed(int key){
-    if(key == 'n') {
-        last = current;
-        
-        if(current < max){
-            current++;
-        } else {
-            current = 1;
-        }
-    }
+    interface.keyPressed(key);
 }
 
 //--------------------------------------------------------------

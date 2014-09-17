@@ -2,18 +2,23 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = 1;
-    max = 2;
-    ofToggleFullscreen();
-    setupExp1();
-    setupExp2();
-    setupExp3();
-    setupExp4();
+    interface.setup();
+    interface.setMax(2);
+    interface.enableBackground();
+    interface.invertColors();
+    current = interface.getCurrent();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    if(interface.changed()) {
+        current = interface.getCurrent();
+        if(current == 1) { setupExp1(); }
+        if(current == 2) { setupExp2(); }
+        if(current == 3) { setupExp3(); }
+        if(current == 4) { setupExp4(); }
+    }
+    interface.update();
 }
 
 //--------------------------------------------------------------
@@ -23,7 +28,8 @@ void ofApp::draw(){
     if(current == 2) { drawExp2(); }
     if(current == 3) { drawExp3(); }
     if(current == 4) { drawExp4(); }
-	ofDisableAlphaBlending();
+    ofDisableAlphaBlending();
+    interface.draw();
 }
 
 //---------- Experiment 1: Two images with slim chances of appearing
@@ -48,6 +54,7 @@ void ofApp::setupExp1() {
 }
 
 void ofApp::drawExp1(){
+    ofSetColor(ofColor::white);
 	for(int i = -100; i < ofGetWidth(); i += 150) {
         for(int j = -100; j < ofGetHeight(); j += 150) {
             int index = (int)ofRandom(imgs3.size());
@@ -79,6 +86,7 @@ void ofApp::setupExp2() {
 }
 
 void ofApp::drawExp2(){
+    ofSetColor(ofColor::white);
 	for(int i = -100; i < ofGetWidth(); i += 150) {
         for(int j = -100; j < ofGetHeight(); j += 150) {
             int index = (int)ofRandom(imgs4.size());
@@ -108,14 +116,7 @@ void ofApp::drawExp4(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if(key == 'n')
-    {
-        if(current < max){
-            current++;
-        } else {
-            current = 1;
-        }
-    }
+    interface.keyPressed(key);
 }
 
 //--------------------------------------------------------------

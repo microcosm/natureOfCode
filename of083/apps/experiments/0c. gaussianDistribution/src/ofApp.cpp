@@ -2,28 +2,32 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = max = 4;
-    ofToggleFullscreen();
-    setupExp1();
-    setupExp2();
-    setupExp3();
-    setupExp4();
+    interface.setup();
+    interface.setMax(4);
+    current = interface.getCurrent();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    changed = prev != current;
-    prev = current;
+    if(interface.changed()) {
+        current = interface.getCurrent();
+        if(current == 1) { setupExp1(); }
+        if(current == 2) { setupExp2(); }
+        if(current == 3) { setupExp3(); }
+        if(current == 4) { setupExp4(); }
+    }
+    interface.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofEnableAlphaBlending();
-    if(current == 1) { if(changed) { setupExp1(); } drawExp1(); }
-    if(current == 2) { if(changed) { setupExp2(); } drawExp2(); }
-    if(current == 3) { if(changed) { setupExp3(); } drawExp3(); }
-    if(current == 4) { if(changed) { setupExp4(); } drawExp4(); }
-	ofDisableAlphaBlending();
+    if(current == 1) { drawExp1(); }
+    if(current == 2) { drawExp2(); }
+    if(current == 3) { drawExp3(); }
+    if(current == 4) { drawExp4(); }
+    ofDisableAlphaBlending();
+    interface.draw();
 }
 
 //---------- Experiment 1: A 1D incrementing array of normalised values
@@ -41,6 +45,7 @@ void ofApp::setupExp1(){
     yPosition = ofGetHeight() - (ofGetHeight() / 10);
     xMultiplier = ofGetWidth() / 500;
     yMultiplier = (ofGetHeight() - (yMultiplier * 2)) / 300;
+    cout << xMultiplier << endl;
 }
 
 void ofApp::drawExp1(){
@@ -171,7 +176,6 @@ void ofApp::drawExp4(){
         int normalY = nextGaussian(numNormals * 0.1, numNormals * 0.5);
         vec2Key vector = vec2Key(normalX, normalY);
         alphas[vector].animateTo(alphas[vector].val() + 1 * alphaMultiplier);
-        cout << "[" << normalX << " " << normalY << "] " << alphas[vector].val() << " " << alphas[vector].val() + 1 * alphaMultiplier << "\n";
     }
     
     //Re-draw
@@ -223,14 +227,7 @@ float ofApp::nextGaussian(float sd, float mean) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if(key == 'n')
-    {
-        if(current < max){
-            current++;
-        } else {
-            current = 1;
-        }
-    }
+    interface.keyPressed(key);
 }
 
 //--------------------------------------------------------------

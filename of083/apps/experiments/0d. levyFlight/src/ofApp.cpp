@@ -2,17 +2,23 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    current = max = 1;
-    ofToggleFullscreen();
-    setupExp1();
-    setupExp2();
-    setupExp3();
-    setupExp4();
+    interface.setup();
+    interface.setMax(1);
+    interface.invertColors();
+    interface.enableBackground();
+    current = interface.getCurrent();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    if(interface.changed()) {
+        current = interface.getCurrent();
+        if(current == 1) { setupExp1(); }
+        if(current == 2) { setupExp2(); }
+        if(current == 3) { setupExp3(); }
+        if(current == 4) { setupExp4(); }
+    }
+    interface.update();
 }
 
 //--------------------------------------------------------------
@@ -21,6 +27,7 @@ void ofApp::draw(){
     if(current == 2) { drawExp2(); }
     if(current == 3) { drawExp3(); }
     if(current == 4) { drawExp4(); }
+    interface.draw();
 }
 
 //---------- Experiment 1:
@@ -51,11 +58,10 @@ void ofApp::setupExp1(){
     //The ball
     ballSize = 10;
     halfBallSize = ballSize * 0.5;
+    currentColor = ofColor::white;
 }
 
 void ofApp::drawExp1(){
-    
-    ofSetBackgroundColor(ofColor::black);
     
     //Update animation
     float dt = 1.0f / ofGetFrameRate();
@@ -70,7 +76,7 @@ void ofApp::drawExp1(){
            midY + y.val() > ofGetHeight() + halfBallSize ||
            midX + x.val() < -halfBallSize ||
            midY + y.val() < -halfBallSize) {
-            ofSetColor(ofColor::red);
+            currentColor = ofColor::red;
             x.animateTo(0);
             y.animateTo(0);
         } else {
@@ -79,11 +85,11 @@ void ofApp::drawExp1(){
             yStep = ofRandom(2) - 1;
             
             if (ofRandom(1) < 0.1) {
-                ofSetColor(ofColor::purple);
+                currentColor = ofColor::purple;
                 x.animateTo(x.val() + xStep * largeStepSize);
                 y.animateTo(y.val() + yStep * largeStepSize);
             } else {
-                ofSetColor(ofColor::white);
+                currentColor = ofColor::white;
                 x.animateTo(x.val() + xStep * regularStepSize);
                 y.animateTo(y.val() + yStep * regularStepSize);
             }
@@ -92,6 +98,8 @@ void ofApp::drawExp1(){
     }
     
     //Draw
+    ofSetBackgroundColor(ofColor::black);
+    ofSetColor(currentColor);
     ofCircle(midX + x.val(), midY + y.val(), ballSize);
 }
 
@@ -124,14 +132,7 @@ void ofApp::drawExp4(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if(key == 'n')
-    {
-        if(current < max){
-            current++;
-        } else {
-            current = 1;
-        }
-    }
+    interface.keyPressed(key);
 }
 
 //--------------------------------------------------------------

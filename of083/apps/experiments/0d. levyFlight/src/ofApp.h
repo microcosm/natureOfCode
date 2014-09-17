@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxExperimentInterface.h"
 #include "ofxAnimatableFloat.h"
 
 class ofApp : public ofBaseApp{
@@ -20,10 +21,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void setupExp1(); void drawExp1();
-    void setupExp2(); void drawExp2();
-    void setupExp3(); void drawExp3();
-    void setupExp4(); void drawExp4();
+        void setupExp1(); void drawExp1();
+        void setupExp2(); void drawExp2();
+        void setupExp3(); void drawExp3();
+        void setupExp4(); void drawExp4();
     
-    int current, max;
+    protected:
+        ofxExperimentInterface interface;
+        int current;
+        ofColor currentColor;
 };
