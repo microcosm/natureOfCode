@@ -28,7 +28,7 @@ void ofApp::draw(){
     interface.draw();
 }
 
-//---------- Experiment 1: Constant Accelerators
+//---------- Experiment 1: Constant acceleration
 vector <PatternMover> accelerators;
 int numAccelerators;
 float x, y;
@@ -46,8 +46,7 @@ void ofApp::setupExp1() {
         mover.setSize(1);
         mover.setup();
         mover.setLocation(x, y);
-        mover.setAcceleration(0, 0.02 * (i+1));
-        
+        mover.setAcceleration(0, 0.04 * (i+1));
         accelerators.push_back(mover);
     }
 }
@@ -59,7 +58,7 @@ void ofApp::drawExp1() {
     }
 }
 
-//---------- Experiment 2: Random Accelerators
+//---------- Experiment 2: Random acceleration change every frame
 float mult;
 
 void ofApp::setupExp2() {
@@ -79,14 +78,14 @@ void ofApp::setupExp2() {
 
 void ofApp::drawExp2() {
     for(int i = 0; i < numAccelerators; i++) {
-        mult = ofMap(i, 0, numAccelerators, 0.2, 0.7);
+        mult = ofMap(i, 0, numAccelerators, 0.4, 0.9);
         accelerators.at(i).setAcceleration(ofRandom(-mult, mult), ofRandom(-mult, mult));
         accelerators.at(i).update();
         accelerators.at(i).draw();
     }
 }
 
-//---------- Experiment 3:
+//---------- Experiment 3: Periodic random acceleration changes
 bool firstTime;
 float xAcceleration, yAcceleration;
 ofColor color;
@@ -126,7 +125,7 @@ void ofApp::drawExp3() {
     firstTime = false;
 }
 
-//---------- Experiment 4:
+//---------- Experiment 4: Accelerate towards the mouse
 ofVec2f mouse;
 float accelerationMultiplier;
 
