@@ -22,8 +22,6 @@ void PatternMover::setup() {
 void PatternMover::update() {
     Mover::update();
     
-    bigCircle.setColor(color);
-    
     smallCircle.update();
     bigCircle.update();
     biggerCircle.update();
@@ -45,5 +43,20 @@ void PatternMover::setSize(float _size) {
 }
 
 void PatternMover::setColor(ofColor _color) {
-    color = _color;
+    smallCircle.setColor(_color);
+    bigCircle.setColor(_color);
+    biggerCircle.setColor(_color);
+}
+
+
+void PatternMover::setColorChangeMode(int mode) {
+    smallCircle.setColorChangeMode(mode);
+    bigCircle.setColorChangeMode(mode);
+    biggerCircle.setColorChangeMode(mode);
+}
+
+void PatternMover::setLineThickness(float thickness) {
+    smallCircle.setLineThickness(thickness);
+    bigCircle.setLineThickness(thickness);
+    biggerCircle.setLineThickness(thickness);
 }

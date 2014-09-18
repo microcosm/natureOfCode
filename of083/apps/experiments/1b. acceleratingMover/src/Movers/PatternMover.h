@@ -2,6 +2,7 @@
 
 #include "Mover.h"
 #include "CirclePattern.h"
+#include "ofxAnimatableOfColor.h"
 
 class PatternMover : public Mover {
     
@@ -12,9 +13,10 @@ public:
     
     void setSize(float _size);
     void setColor(ofColor _color);
+    void setColorChangeMode(int mode);
+    void setLineThickness(float thickness);
     
 protected:
     CirclePattern smallCircle, bigCircle, biggerCircle;
-    ofColor color;
     float size;
 };

@@ -87,33 +87,43 @@ void ofApp::drawExp2() {
 }
 
 //---------- Experiment 3:
+bool firstTime;
+float xAcceleration, yAcceleration;
+ofColor color;
+
 void ofApp::setupExp3() {
     ofBackground(ofColor::black);
     numAccelerators = 8;
     accelerators.clear();
+    firstTime = true;
     
     for(int i = 0; i < numAccelerators; i++) {
         PatternMover mover;
         mover.setSize(ofMap(i, 0, numAccelerators, 0.15, 1.2));
         mover.setup();
         mover.setTopSpeed(ofMap(i, 0, numAccelerators, 1, 20));
+        mover.setLineThickness(ofMap(i, 0, numAccelerators, 2, 200));
         mover.setLocation(ofRandomWidth(), ofRandomHeight());
         accelerators.push_back(mover);
     }
 }
 
 void ofApp::drawExp3() {
+    xAcceleration = ofRandom(-1, 1);
+    yAcceleration = ofRandom(-1, 1);
+    
     for(int i = 0; i < numAccelerators; i++) {
-        mult = ofMap(i, 0, numAccelerators, 1, 2);
-        if(ofGetFrameNum() % 30 == 0) {
-            accelerators.at(i).setColor(ofColor::red);
-            accelerators.at(i).setAcceleration(ofRandom(-mult, mult), ofRandom(-mult, mult));
-        } else {
-            accelerators.at(i).setColor(ofColor::white);
+        mult = ofMap(i, 0, numAccelerators, 1, 10);
+        if(firstTime || ofGetFrameNum() % 60 == 0) {
+            color.setHsb(ofRandom(0, 255), 255, 255);
+            accelerators.at(i).setColorChangeMode(COLOR_CHANGE_SLOW);
+            accelerators.at(i).setColor(color);
+            accelerators.at(i).setAcceleration(xAcceleration * mult, yAcceleration * mult);
         }
         accelerators.at(i).update();
         accelerators.at(i).draw();
     }
+    firstTime = false;
 }
 
 //---------- Experiment 4:

@@ -12,7 +12,12 @@ void CirclePattern::setup() {
 #endif
     
     setTransparent(false);
+    setColorChangeMode(COLOR_CHANGE_IMMEDIATE);
     setColor(ofColor::white);
+    setLineThickness(1);
+    
+    color.setDuration(0.5);
+    color.setCurve(SWIFT_GOOGLE);
     
     ofSetCircleResolution(halfFboSize);
     ofEnableSmoothing();
@@ -22,6 +27,7 @@ void CirclePattern::setup() {
 }
 
 void CirclePattern::update() {
+    color.update(1.0f/ofGetFrameRate());
     drawMaskedFbo();
     drawMaskFbo();
 }
@@ -40,11 +46,26 @@ void CirclePattern::setSize(int _size) {
 }
 
 void CirclePattern::setColor(ofColor _color) {
-    color = _color;
+    switch(colorChangeMode){
+        case COLOR_CHANGE_IMMEDIATE:
+            color.setColor(_color);
+            break;
+        case COLOR_CHANGE_SLOW:
+            color.animateToIfFinished(_color);
+            break;
+    }
+}
+
+void CirclePattern::setColorChangeMode(int mode) {
+    colorChangeMode = mode;
 }
 
 void CirclePattern::setTransparent(bool _transparent) {
     transparent = _transparent;
+}
+
+void CirclePattern::setLineThickness(float thickness) {
+    lineThickness = thickness;
 }
 
 void CirclePattern::setNumLines(int _numLines) {
@@ -61,7 +82,8 @@ void CirclePattern::init(ofFbo &fbo) {
 void CirclePattern::drawMaskedFbo() {
     maskedFbo.begin();
     clearFbo();
-    ofSetColor(color);
+    ofSetColor(color.getCurrentColor());
+    ofSetLineWidth(lineThickness);
     for(int i = 0; i < numLines; i++) {
         ofLine(ofRandom(fboSize), ofRandom(fboSize), ofRandom(fboSize), ofRandom(fboSize));
     }
