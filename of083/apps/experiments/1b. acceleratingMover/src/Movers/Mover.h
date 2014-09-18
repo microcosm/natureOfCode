@@ -12,6 +12,7 @@ public:
     void setTopSpeed(int speed);
     void setLocation(float x, float y);
     void setAcceleration(float x, float y);
+    void accelerateTowards(ofVec2f target, float multiplier);
     
 protected:
     void checkEdges();

@@ -29,6 +29,12 @@ void Mover::setAcceleration(float x, float y) {
     acceleration.set(x, y);
 }
 
+void Mover::accelerateTowards(ofVec2f target, float multiplier) {
+    acceleration = target - location;
+    acceleration.normalize();
+    acceleration *= multiplier;
+}
+
 void Mover::checkEdges() {
     if (location.x > ofGetWidth()) {
         location.x = 0;

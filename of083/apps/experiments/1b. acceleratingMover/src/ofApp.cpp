@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     interface.setup();
-    interface.setMax(3);
+    interface.setMax(4);
     current = interface.getCurrent();
 }
 
@@ -127,12 +127,39 @@ void ofApp::drawExp3() {
 }
 
 //---------- Experiment 4:
+ofVec2f mouse;
+float accelerationMultiplier;
+
 void ofApp::setupExp4() {
+    ofBackground(ofColor::black);
+    numAccelerators = 5;
+    accelerators.clear();
+    firstTime = true;
     
+    for(int i = 0; i < numAccelerators; i++) {
+        color.setHsb(ofMap(i, 0, numAccelerators, 0, 255), 255, 255);
+        
+        PatternMover mover;
+        mover.setSize(ofMap(i, 0, numAccelerators, 2, 0.5));
+        mover.setup();
+        mover.setColor(color);
+        mover.setTopSpeed(ofMap(i, 0, numAccelerators, 40, 4));
+        mover.setLineThickness(ofMap(i, 0, numAccelerators, 2, 50));
+        mover.setLocation(ofRandomWidth(), ofRandomHeight());
+        accelerators.push_back(mover);
+    }
 }
 
 void ofApp::drawExp4() {
+    mouse.set(ofGetMouseX(), ofGetMouseY());
     
+    for(int i = 0; i < numAccelerators; i++) {
+        mult = ofMap(i, 0, numAccelerators, 2, 1);
+        accelerators.at(i).accelerateTowards(mouse, mult);
+        accelerators.at(i).update();
+        accelerators.at(i).draw();
+    }
+    firstTime = false;
 }
 
 //--------------------------------------------------------------
