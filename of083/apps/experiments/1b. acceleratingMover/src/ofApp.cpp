@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     interface.setup();
-    interface.setMax(2);
+    interface.setMax(3);
     current = interface.getCurrent();
 }
 
@@ -29,17 +29,17 @@ void ofApp::draw(){
 }
 
 //---------- Experiment 1: Constant Accelerators
-vector <PatternMover> constantAccelerators;
-int numConstantAccelerators;
+vector <PatternMover> accelerators;
+int numAccelerators;
 float x, y;
 
 void ofApp::setupExp1() {
     ofBackground(ofColor::black);
-    numConstantAccelerators = 8;
-    constantAccelerators.clear();
+    numAccelerators = 8;
+    accelerators.clear();
     
-    for(int i = 0; i < numConstantAccelerators; i++) {
-        x = ofGetWidth() * (1.0 / (numConstantAccelerators+1)) * (i+1);
+    for(int i = 0; i < numAccelerators; i++) {
+        x = ofGetWidth() * (1.0 / (numAccelerators+1)) * (i+1);
         y = ofGetHeight() * 0.5;
         
         PatternMover mover;
@@ -48,53 +48,69 @@ void ofApp::setupExp1() {
         mover.setLocation(x, y);
         mover.setAcceleration(0, 0.02 * (i+1));
         
-        constantAccelerators.push_back(mover);
+        accelerators.push_back(mover);
     }
 }
 
 void ofApp::drawExp1() {
-    for(int i = 0; i < numConstantAccelerators; i++) {
-        constantAccelerators.at(i).update();
-        constantAccelerators.at(i).draw();
+    for(int i = 0; i < numAccelerators; i++) {
+        accelerators.at(i).update();
+        accelerators.at(i).draw();
     }
 }
 
 //---------- Experiment 2: Random Accelerators
-vector <PatternMover> randomAccelerators;
-int numRandomAccelerators;
 float mult;
 
 void ofApp::setupExp2() {
     ofBackground(ofColor::black);
-    numRandomAccelerators = 5;
-    randomAccelerators.clear();
+    numAccelerators = 5;
+    accelerators.clear();
     
-    for(int i = 0; i < numRandomAccelerators; i++) {
+    for(int i = 0; i < numAccelerators; i++) {
         PatternMover mover;
-        mover.setSize(ofMap(i, 0, numRandomAccelerators, 0.2, 3));
+        mover.setSize(ofMap(i, 0, numAccelerators, 0.2, 3));
         mover.setup();
-        mover.setTopSpeed(ofMap(i, 0, numRandomAccelerators, 1, 20));
+        mover.setTopSpeed(ofMap(i, 0, numAccelerators, 1, 20));
         mover.setLocation(ofRandomWidth(), ofRandomHeight());
-        randomAccelerators.push_back(mover);
+        accelerators.push_back(mover);
     }
 }
 
 void ofApp::drawExp2() {
-    for(int i = 0; i < numRandomAccelerators; i++) {
-        mult = ofMap(i, 0, numRandomAccelerators, 0.2, 0.7);
-        randomAccelerators.at(i).setAcceleration(ofRandom(-mult, mult), ofRandom(-mult, mult));
-        randomAccelerators.at(i).update();
-        randomAccelerators.at(i).draw();
+    for(int i = 0; i < numAccelerators; i++) {
+        mult = ofMap(i, 0, numAccelerators, 0.2, 0.7);
+        accelerators.at(i).setAcceleration(ofRandom(-mult, mult), ofRandom(-mult, mult));
+        accelerators.at(i).update();
+        accelerators.at(i).draw();
     }
 }
 
 //---------- Experiment 3:
 void ofApp::setupExp3() {
+    ofBackground(ofColor::black);
+    numAccelerators = 8;
+    accelerators.clear();
     
+    for(int i = 0; i < numAccelerators; i++) {
+        PatternMover mover;
+        mover.setSize(ofMap(i, 0, numAccelerators, 0.15, 1.2));
+        mover.setup();
+        mover.setTopSpeed(ofMap(i, 0, numAccelerators, 1, 20));
+        mover.setLocation(ofRandomWidth(), ofRandomHeight());
+        accelerators.push_back(mover);
+    }
 }
 
 void ofApp::drawExp3() {
-    
+    for(int i = 0; i < numAccelerators; i++) {
+        mult = ofMap(i, 0, numAccelerators, 1, 2);
+        if(ofGetFrameNum() % 30 == 0) {
+            accelerators.at(i).setAcceleration(ofRandom(-mult, mult), ofRandom(-mult, mult));
+        }
+        accelerators.at(i).update();
+        accelerators.at(i).draw();
+    }
 }
 
 //---------- Experiment 4:

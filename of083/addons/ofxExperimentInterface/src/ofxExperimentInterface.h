@@ -11,6 +11,7 @@ public:
     void keyPressed(int key);
     
     void setMax(int _max);
+    void setCurrent(int _current);
     void enableBackground();
     void invertColors();
     bool changed();

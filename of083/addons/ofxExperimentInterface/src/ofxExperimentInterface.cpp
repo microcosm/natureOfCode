@@ -40,6 +40,10 @@ void ofxExperimentInterface::setMax(int _max) {
     max = _max;
 }
 
+void ofxExperimentInterface::setCurrent(int _current) {
+    current = _current;
+}
+
 void ofxExperimentInterface::enableBackground() {
     displayBackground = true;
 }
