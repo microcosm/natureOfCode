@@ -11,8 +11,10 @@ public:
     void draw();
     
     void setSize(float _size);
+    void setColor(ofColor _color);
     
 protected:
     CirclePattern smallCircle, bigCircle, biggerCircle;
+    ofColor color;
     float size;
 };

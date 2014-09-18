@@ -106,7 +106,10 @@ void ofApp::drawExp3() {
     for(int i = 0; i < numAccelerators; i++) {
         mult = ofMap(i, 0, numAccelerators, 1, 2);
         if(ofGetFrameNum() % 30 == 0) {
+            accelerators.at(i).setColor(ofColor::red);
             accelerators.at(i).setAcceleration(ofRandom(-mult, mult), ofRandom(-mult, mult));
+        } else {
+            accelerators.at(i).setColor(ofColor::white);
         }
         accelerators.at(i).update();
         accelerators.at(i).draw();

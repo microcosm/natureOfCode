@@ -22,6 +22,8 @@ void PatternMover::setup() {
 void PatternMover::update() {
     Mover::update();
     
+    bigCircle.setColor(color);
+    
     smallCircle.update();
     bigCircle.update();
     biggerCircle.update();
@@ -40,4 +42,8 @@ void PatternMover::draw() {
 
 void PatternMover::setSize(float _size) {
     size = _size;
+}
+
+void PatternMover::setColor(ofColor _color) {
+    color = _color;
 }

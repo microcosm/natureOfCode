@@ -12,6 +12,7 @@ void CirclePattern::setup() {
 #endif
     
     setTransparent(false);
+    setColor(ofColor::white);
     
     ofSetCircleResolution(halfFboSize);
     ofEnableSmoothing();
@@ -38,6 +39,10 @@ void CirclePattern::setSize(int _size) {
     halfFboSize = fboSize * 0.5;
 }
 
+void CirclePattern::setColor(ofColor _color) {
+    color = _color;
+}
+
 void CirclePattern::setTransparent(bool _transparent) {
     transparent = _transparent;
 }
@@ -56,7 +61,7 @@ void CirclePattern::init(ofFbo &fbo) {
 void CirclePattern::drawMaskedFbo() {
     maskedFbo.begin();
     clearFbo();
-    ofSetColor(ofColor::white);
+    ofSetColor(color);
     for(int i = 0; i < numLines; i++) {
         ofLine(ofRandom(fboSize), ofRandom(fboSize), ofRandom(fboSize), ofRandom(fboSize));
     }
