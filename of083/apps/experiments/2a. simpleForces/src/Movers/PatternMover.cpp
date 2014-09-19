@@ -26,6 +26,10 @@ void PatternMover::animateToColor(ofColor _color) {
     circle.animateToColor(_color);
 }
 
+void PatternMover::setAnimationTime(float time) {
+    circle.setAnimationTime(time);
+}
+
 void PatternMover::setSize(int size) {
     circle.setSize(size);
 }

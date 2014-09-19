@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxAnimatableOfColor.h"
+#include "ofxAnimatableFloat.h"
 
 class SimpleCirclePattern {
     
@@ -10,11 +11,13 @@ public:
     void update();
     void draw();
     void setColor(ofColor _color);
+    void setAnimationTime(float time);
     void animateToColor(ofColor _color);
     void setSize(int _size);
     void incrementSize();
     
 protected:
     ofxAnimatableOfColor color;
-    int size;
+    ofxAnimatableFloat size;
+    float animationTime;
 };

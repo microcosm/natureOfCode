@@ -1,14 +1,16 @@
 #include "SimpleCirclePattern.h"
 
 void SimpleCirclePattern::setup() {
-    ofSetCircleResolution(20);
+    ofSetCircleResolution(40);
     ofEnableSmoothing();
-    color.setDuration(0.75);
+    setAnimationTime(0.5);
     color.setCurve(SWIFT_GOOGLE);
 }
 
 void SimpleCirclePattern::update() {
-    color.update(1.0f/ofGetFrameRate());
+    float dt = 1.0f/ofGetFrameRate();
+    color.update(dt);
+    size.update(dt);
 }
 
 void SimpleCirclePattern::draw() {
@@ -20,14 +22,19 @@ void SimpleCirclePattern::setColor(ofColor _color) {
     color.setColor(_color);
 }
 
+void SimpleCirclePattern::setAnimationTime(float time) {
+    color.setDuration(time);
+    size.setDuration(time);
+}
+
 void SimpleCirclePattern::animateToColor(ofColor _color) {
     color.animateTo(_color);
 }
 
 void SimpleCirclePattern::setSize(int _size) {
-    size = _size;
+    size.reset(_size);
 }
 
 void SimpleCirclePattern::incrementSize() {
-    size *= 2;
+    size.animateToIfFinished(size.getCurrentValue() * 2);
 }

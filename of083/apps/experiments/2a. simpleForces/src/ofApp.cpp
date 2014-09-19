@@ -110,7 +110,7 @@ void ofApp::setupExp2() {
 }
 
 void ofApp::drawExp2() {
-    switchColors = ofGetFrameNum() % 60 == 0;
+    switchColors = ofGetFrameNum() % 120 == 0;
     
     if(switchColors) {
         newHue = ofRandom(0, 185);

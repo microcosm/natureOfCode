@@ -13,6 +13,7 @@ public:
     
     void setColor(ofColor _color);
     void animateToColor(ofColor _color);
+    void setAnimationTime(float time);
     void setSize(int size);
     void incrementSize();
     
