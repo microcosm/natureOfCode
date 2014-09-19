@@ -21,3 +21,15 @@ void PatternMover::draw() {
 void PatternMover::setColor(ofColor _color) {
     circle.setColor(_color);
 }
+
+void PatternMover::animateToColor(ofColor _color) {
+    circle.animateToColor(_color);
+}
+
+void PatternMover::setSize(int size) {
+    circle.setSize(size);
+}
+
+void PatternMover::incrementSize() {
+    circle.incrementSize();
+}

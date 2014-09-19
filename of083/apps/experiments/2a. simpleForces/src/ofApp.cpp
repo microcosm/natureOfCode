@@ -4,6 +4,7 @@
 void ofApp::setup(){
     interface.setup();
     interface.setMax(2);
+    interface.enableBackground();
     current = interface.getCurrent();
 }
 
@@ -37,6 +38,7 @@ float x, y, minX, maxX, minY, maxY;
 
 void ofApp::setupExp1() {
     ofBackground(ofColor::black);
+    ofSetBackgroundAuto(true);
     numMovers = 50;
     movers.clear();
     gravity = ofVec2f(0, 0.2);
@@ -56,6 +58,7 @@ void ofApp::setupExp1() {
         PatternMover mover;
         mover.setup();
         mover.setColor(color);
+        mover.setSize(20);
         mover.applyForce(initial);
         mover.setLocation(x, y);
         movers.push_back(mover);
@@ -71,12 +74,57 @@ void ofApp::drawExp1() {
 }
 
 //---------- Experiment 2:
+bool switchColors;
+int newHue;
+
 void ofApp::setupExp2() {
+    ofBackground(ofColor::black);
+    ofSetBackgroundAuto(false);
+    numMovers = 5000;
+    movers.clear();
+    gravity = ofVec2f(0, 0.2);
     
+    for(int i = 0; i < numMovers; i++) {
+        minX = ofGetWidth()  * 0.495;
+        maxX = ofGetWidth()  * 0.505;
+        x = ofRandom(minX, maxX);
+        
+        minY = ofGetHeight() * 0;
+        maxY = ofGetHeight() * 0.7;
+        y = ofRandom(minY, maxY);
+        
+        color.setHsb(     ofMap(y, minY, maxY, 0, 70), 255, 255);
+        initial = ofVec2f(ofMap(x, minX, maxX, -4, 4), 0);
+        
+        PatternMover mover;
+        mover.setup();
+        mover.setColor(color);
+        mover.setSize(1);
+        mover.setTopSpeed(500);
+        mover.applyForce(initial);
+        mover.setLocation(x, y);
+        movers.push_back(mover);
+    }
 }
 
 void ofApp::drawExp2() {
+    switchColors = ofGetFrameNum() % 600 == 0;
+    if(switchColors) {
+        newHue = ofRandom(0, 185);
+    }
     
+    for(int i = 0; i < numMovers; i++) {
+        if(switchColors) {
+            y = movers.at(i).getY();
+            color.setHsb(ofMap(y, minY, maxY, newHue, newHue + 70), 255, 255);
+            movers.at(i).animateToColor(color);
+            movers.at(i).incrementSize();
+        }
+        
+        movers.at(i).applyForce(gravity);
+        movers.at(i).update();
+        movers.at(i).draw();
+    }
 }
 
 //---------- Experiment 3:

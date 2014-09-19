@@ -50,6 +50,14 @@ void Mover::accelerateTowards(ofVec2f target, float multiplier) {
     acceleration *= multiplier;
 }
 
+float Mover::getX() {
+    return location.x;
+}
+
+float Mover::getY() {
+    return location.y;
+}
+
 void Mover::checkEdges() {
     if (location.x > ofGetWidth()) {
         location.x = ofGetWidth();

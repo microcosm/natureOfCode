@@ -12,6 +12,9 @@ public:
     void draw();
     
     void setColor(ofColor _color);
+    void animateToColor(ofColor _color);
+    void setSize(int size);
+    void incrementSize();
     
 protected:
     SimpleCirclePattern circle;

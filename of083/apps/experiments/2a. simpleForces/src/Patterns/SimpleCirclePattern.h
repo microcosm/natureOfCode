@@ -10,7 +10,11 @@ public:
     void update();
     void draw();
     void setColor(ofColor _color);
+    void animateToColor(ofColor _color);
+    void setSize(int _size);
+    void incrementSize();
     
 protected:
-    ofColor color;
+    ofxAnimatableOfColor color;
+    int size;
 };

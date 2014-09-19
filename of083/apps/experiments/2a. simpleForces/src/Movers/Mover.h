@@ -15,6 +15,8 @@ public:
     void setMass(float _mass);
     void setAcceleration(float x, float y);
     void accelerateTowards(ofVec2f target, float multiplier);
+    float getX();
+    float getY();
     
 protected:
     void checkEdges();
