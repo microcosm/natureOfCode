@@ -88,8 +88,10 @@ A bunch of movers affected by wind to the right and (simplified) gravity to the 
       if (location.y > height) {
         velocity.y *= -1;
         location.y = height;
+      } else if (location.y < 0) {
+        velocity.y *= -1;
+        location.y = 0;
       }
-      //Are we missing something here?
     }
   }
 
@@ -123,10 +125,10 @@ Exercise 2.3
 ============
 "Instead of objects bouncing off the edge of the wall, create an example in which an invisible force pushes back on the objects to keep them in the window. Can you weight the force according to how far the object is from an edge—i.e., the closer it is, the stronger the force?"
 
-Do Smaller Objects Really Fall Faster??
+Actual Gravity
+==============
+The problem with the code above is that small objects will fall faster, because acceleration / mass = force. With actual gravity, do Smaller Objects Really Fall Faster??
 Er, no.
-
-The problem with the code above is that small objects will fall faster, because acceleration / mass = force.
 
 Actual gravity has another nuance we haven't modeled yet - it is calculated relative to an object's mass. The bigger the object, the stronger the force. So if the force is scaled according to mass, it is canceled out when acceleration is divided by mass. We can implement this in our sketch rather easily by multiplying our made-up gravity force by mass:
 */
