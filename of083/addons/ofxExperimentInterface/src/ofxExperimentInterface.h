@@ -26,5 +26,5 @@ protected:
     int current, last, max;
     ofVec2f backgroundSize, initialBackgroundSize;
     bool displayToggle, displayBackground, invertedColors;
-    string displayString, additionalText;
+    string displayString, explanation, additionalText;
 };

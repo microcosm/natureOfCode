@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     interface.setup();
-    interface.setMax(2);
+    interface.setMax(4);
     interface.enableBackground();
     interface.invertColors();
     current = interface.getCurrent();
@@ -80,7 +80,7 @@ int newHue;
 
 void ofApp::setupExp2() {
     ofBackground(ofColor::black);
-    ofSetBackgroundAuto(false);
+    ofSetBackgroundAuto(true);
     numMovers = 5000;
     resetSize = false;
     movers.clear();
@@ -110,7 +110,7 @@ void ofApp::setupExp2() {
 }
 
 void ofApp::drawExp2() {
-    switchColors = ofGetFrameNum() % 120 == 0;
+    switchColors = ofGetFrameNum() % 400 == 0;
     
     if(switchColors) {
         newHue = ofRandom(0, 185);
@@ -145,20 +145,134 @@ void ofApp::drawExp2() {
 
 //---------- Experiment 3:
 void ofApp::setupExp3() {
+    ofBackground(ofColor::black);
+    ofSetBackgroundAuto(false);
+    numMovers = 5000;
+    resetSize = false;
+    movers.clear();
+    gravity = ofVec2f(0, 0.2);
     
+    for(int i = 0; i < numMovers; i++) {
+        minX = ofGetWidth()  * 0.495;
+        maxX = ofGetWidth()  * 0.505;
+        x = ofRandom(minX, maxX);
+        
+        minY = ofGetHeight() * 0;
+        maxY = ofGetHeight() * 0.7;
+        y = ofRandom(minY, maxY);
+        
+        color.setHsb(     ofMap(y, minY, maxY, 0, 70), 255, 255);
+        initial = ofVec2f(ofMap(x, minX, maxX, -4, 4), 0);
+        
+        PatternMover mover;
+        mover.setup();
+        mover.setColor(color);
+        mover.setSize(1);
+        mover.setTopSpeed(500);
+        mover.applyForce(initial);
+        mover.setLocation(x, y);
+        movers.push_back(mover);
+    }
 }
 
 void ofApp::drawExp3() {
+    switchColors = ofGetFrameNum() % 400 == 0;
     
+    if(switchColors) {
+        newHue = ofRandom(0, 185);
+        numMovers *= 0.5;
+        if(numMovers == 0) {
+            numMovers = 5000;
+            resetSize = true;
+        } else {
+            resetSize = false;
+        }
+    }
+    
+    interface.addText("Currently " + ofToString(numMovers) + " balls");
+    
+    for(int i = 0; i < numMovers; i++) {
+        if(switchColors) {
+            y = movers.at(i).getY();
+            color.setHsb(ofMap(y, minY, maxY, newHue, newHue + 70), 255, 255);
+            movers.at(i).animateToColor(color);
+            if(resetSize) {
+                movers.at(i).setSize(1);
+            } else {
+                movers.at(i).incrementSize();
+            }
+        }
+        
+        movers.at(i).applyForce(gravity);
+        movers.at(i).update();
+        movers.at(i).draw();
+    }
 }
 
 //---------- Experiment 4:
 void ofApp::setupExp4() {
+    ofBackground(ofColor::black);
+    ofSetBackgroundAuto(false);
+    numMovers = 5000;
+    resetSize = false;
+    movers.clear();
+    gravity = ofVec2f(0, 0.2);
     
+    for(int i = 0; i < numMovers; i++) {
+        minX = ofGetWidth()  * 0.495;
+        maxX = ofGetWidth()  * 0.505;
+        x = ofRandom(minX, maxX);
+        
+        minY = ofGetHeight() * 0;
+        maxY = ofGetHeight() * 0.7;
+        y = ofRandom(minY, maxY);
+        
+        color.setHsb(     ofMap(y, minY, maxY, 0, 70), 255, 255);
+        initial = ofVec2f(ofMap(x, minX, maxX, -4, 4), 0);
+        
+        PatternMover mover;
+        mover.setup();
+        mover.setColor(color);
+        mover.setSize(1);
+        mover.setTopSpeed(500);
+        mover.applyForce(initial);
+        mover.setLocation(x, y);
+        movers.push_back(mover);
+    }
 }
 
 void ofApp::drawExp4() {
+    switchColors = ofGetFrameNum() % 20 == 0;
     
+    if(switchColors) {
+        newHue = ofRandom(0, 185);
+        numMovers *= 0.5;
+        if(numMovers == 0) {
+            numMovers = 5000;
+            resetSize = true;
+        } else {
+            resetSize = false;
+        }
+    }
+    
+    interface.addText("Currently " + ofToString(numMovers) + " balls");
+    
+    for(int i = 0; i < numMovers; i++) {
+        if(switchColors) {
+            y = movers.at(i).getY();
+            color.setHsb(ofMap(y, minY, maxY, newHue, newHue + 70), 255, 255);
+            movers.at(i).animateToColor(color);
+            if(resetSize) {
+                movers.at(i).setSize(1);
+            } else {
+                movers.at(i).incrementSize();
+            }
+        }
+        
+        movers.at(i).applyForce(gravity);
+        movers.at(i).update();
+        movers.at(i).draw();
+    }
 }
 
 //--------------------------------------------------------------
