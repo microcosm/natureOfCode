@@ -5,6 +5,7 @@ void ofApp::setup(){
     interface.setup();
     interface.setMax(2);
     interface.enableBackground();
+    interface.invertColors();
     current = interface.getCurrent();
 }
 
@@ -74,13 +75,14 @@ void ofApp::drawExp1() {
 }
 
 //---------- Experiment 2:
-bool switchColors;
+bool switchColors, resetSize;
 int newHue;
 
 void ofApp::setupExp2() {
     ofBackground(ofColor::black);
     ofSetBackgroundAuto(false);
     numMovers = 5000;
+    resetSize = false;
     movers.clear();
     gravity = ofVec2f(0, 0.2);
     
@@ -108,17 +110,31 @@ void ofApp::setupExp2() {
 }
 
 void ofApp::drawExp2() {
-    switchColors = ofGetFrameNum() % 600 == 0;
+    switchColors = ofGetFrameNum() % 60 == 0;
+    
     if(switchColors) {
         newHue = ofRandom(0, 185);
+        numMovers *= 0.5;
+        if(numMovers == 0) {
+            numMovers = 5000;
+            resetSize = true;
+        } else {
+            resetSize = false;
+        }
     }
+    
+    interface.addText("Currently " + ofToString(numMovers) + " balls");
     
     for(int i = 0; i < numMovers; i++) {
         if(switchColors) {
             y = movers.at(i).getY();
             color.setHsb(ofMap(y, minY, maxY, newHue, newHue + 70), 255, 255);
             movers.at(i).animateToColor(color);
-            movers.at(i).incrementSize();
+            if(resetSize) {
+                movers.at(i).setSize(1);
+            } else {
+                movers.at(i).incrementSize();
+            }
         }
         
         movers.at(i).applyForce(gravity);
