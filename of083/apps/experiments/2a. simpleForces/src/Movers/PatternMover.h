@@ -15,6 +15,7 @@ public:
     void animateToColor(ofColor _color);
     void setAnimationTime(float time);
     void setSize(int size);
+    float getSize();
     void incrementSize();
     
 protected:

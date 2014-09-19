@@ -35,6 +35,10 @@ void SimpleCirclePattern::setSize(int _size) {
     size.reset(_size);
 }
 
+float SimpleCirclePattern::getSize() {
+    return size.getCurrentValue();
+}
+
 void SimpleCirclePattern::incrementSize() {
     size.animateToIfFinished(size.getCurrentValue() * 2);
 }

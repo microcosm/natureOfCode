@@ -34,6 +34,10 @@ void PatternMover::setSize(int size) {
     circle.setSize(size);
 }
 
+float PatternMover::getSize() {
+    return circle.getSize();
+}
+
 void PatternMover::incrementSize() {
     circle.incrementSize();
 }

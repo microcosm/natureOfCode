@@ -38,6 +38,8 @@ ofColor color;
 float x, y, minX, maxX, minY, maxY;
 
 void ofApp::setupExp1() {
+    interface.initText("Red balls are bouncier\nthan green. Balls\nsplay outward from\ncenter.");
+    
     ofBackground(ofColor::black);
     ofSetBackgroundAuto(true);
     numMovers = 50;
@@ -54,7 +56,7 @@ void ofApp::setupExp1() {
         y = ofRandom(minY, maxY);
         
         color.setHsb(     ofMap(y, minY, maxY, 0, 70), 255, 255);
-        initial = ofVec2f(ofMap(x, minX, maxX, -4, 4), 0);
+        initial = ofVec2f(ofMap(x, minX, maxX, -6, 6), 0);
         
         PatternMover mover;
         mover.setup();
@@ -79,6 +81,8 @@ bool switchColors, resetSize;
 int newHue;
 
 void ofApp::setupExp2() {
+    interface.initText("Every 400 frames\nthe balls increase\nin size and the\nnumber drawn halves.");
+    
     ofBackground(ofColor::black);
     ofSetBackgroundAuto(true);
     numMovers = 5000;
@@ -123,7 +127,7 @@ void ofApp::drawExp2() {
         }
     }
     
-    interface.addText("Currently " + ofToString(numMovers) + " balls");
+    interface.addText("Currently " + ofToString(numMovers) + " balls\nof size " + ofToString(movers.at(0).getSize()));
     
     for(int i = 0; i < numMovers; i++) {
         if(switchColors) {
@@ -145,6 +149,8 @@ void ofApp::drawExp2() {
 
 //---------- Experiment 3:
 void ofApp::setupExp3() {
+    interface.initText("Exactly the same\nas the previous\nexperiment, but now\nleaving trails.");
+    
     ofBackground(ofColor::black);
     ofSetBackgroundAuto(false);
     numMovers = 5000;
@@ -189,7 +195,7 @@ void ofApp::drawExp3() {
         }
     }
     
-    interface.addText("Currently " + ofToString(numMovers) + " balls");
+    interface.addText("Currently " + ofToString(numMovers) + " balls\nof size " + ofToString(movers.at(0).getSize()));
     
     for(int i = 0; i < numMovers; i++) {
         if(switchColors) {
@@ -211,6 +217,8 @@ void ofApp::drawExp3() {
 
 //---------- Experiment 4:
 void ofApp::setupExp4() {
+    interface.initText("Exactly the same\nas the previous\nexperiment, but now\nchanging every 20\nframes, not 400.");
+    
     ofBackground(ofColor::black);
     ofSetBackgroundAuto(false);
     numMovers = 5000;
@@ -255,7 +263,7 @@ void ofApp::drawExp4() {
         }
     }
     
-    interface.addText("Currently " + ofToString(numMovers) + " balls");
+    interface.addText("Currently " + ofToString(numMovers) + " balls\nof size " + ofToString(movers.at(0).getSize()));
     
     for(int i = 0; i < numMovers; i++) {
         if(switchColors) {

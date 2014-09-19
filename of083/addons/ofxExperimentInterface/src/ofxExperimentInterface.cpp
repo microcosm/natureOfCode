@@ -7,6 +7,7 @@ void ofxExperimentInterface::setup() {
     displayBackground = false;
     invertedColors = false;
     backgroundSize = initialBackgroundSize = ofVec2f(215, 114);
+    additionalText = "";
     ofToggleFullscreen();
 }
 
@@ -37,9 +38,15 @@ void ofxExperimentInterface::keyPressed(int key){
     }
 }
 
+void ofxExperimentInterface::initText(string text) {
+    additionalText = "";
+    initialText = text;
+    newBackgroundSize();
+}
+
 void ofxExperimentInterface::addText(string text) {
-    newBackgroundSize(text);
-    additionalText = text;
+    additionalText = "\n\n" + text;
+    newBackgroundSize();
 }
 
 void ofxExperimentInterface::setMax(int _max) {
@@ -92,12 +99,13 @@ void ofxExperimentInterface::drawText() {
     displayString += "\n\n";
     displayString += "d: toggle display\n";
     displayString += "n: next experiment\n\n";
-    displayString += additionalText;
+    displayString += initialText + additionalText;
     ofDrawBitmapString(displayString, 19, 25);
 }
 
-void ofxExperimentInterface::newBackgroundSize(string toFitString) {
-    int numLines = count(toFitString.begin(), toFitString.end(), '\n') + 1;
+void ofxExperimentInterface::newBackgroundSize() {
+    string full = initialText + additionalText;
+    int numLines = count(full.begin(), full.end(), '\n') + 1;
     backgroundSize = initialBackgroundSize;
     backgroundSize.y += 16 * numLines;
 }
