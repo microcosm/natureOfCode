@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     interface.setup();
-    interface.setMax(1);
+    interface.setMax(2);
     interface.enableBackground();
     interface.invertColors();
     current = interface.getCurrent();
@@ -79,11 +79,43 @@ void ofApp::drawExp1() {
 
 //---------- Experiment 2:
 void ofApp::setupExp2() {
+    interface.initText("Differently-sized balls\noperating according to\nnewton's second law,\nbut now taking into\naccount the effect of\ngravity on weight.\n\n(w = m * g)");
     
+    ofBackground(ofColor::black);
+    ofSetBackgroundAuto(true);
+    numMovers = 20;
+    movers.clear();
+    gravity = ofVec2f(0, 0.5);
+    
+    for(int i = 0; i < numMovers; i++) {
+        minX = ofGetWidth()  * 0.01;
+        maxX = ofGetWidth()  * 0.99;
+        
+        minWeight = ofGetWidth() * 0.002;
+        maxWeight = ofGetWidth() * 0.025;
+        
+        x = ofRandom(minX, maxX);
+        y = 0.5;
+        weight = ofRandom(minWeight, maxWeight);
+        
+        color = ofColor::fromHsb(ofRandom(0, 255), 255, 255);
+        
+        PatternMover mover;
+        mover.setup();
+        mover.setColor(color);
+        mover.setSize(weight);
+        mover.setMass(weight);
+        mover.setLocation(x, y);
+        movers.push_back(mover);
+    }
 }
 
 void ofApp::drawExp2() {
-    
+    for(int i = 0; i < numMovers; i++) {
+        movers.at(i).applyGravity(gravity);
+        movers.at(i).update();
+        movers.at(i).draw();
+    }
 }
 
 //---------- Experiment 3:

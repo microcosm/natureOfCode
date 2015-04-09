@@ -10,6 +10,7 @@ public:
     void draw();
     
     void applyForce(ofVec2f force);
+    void applyGravity(ofVec2f force);
     void setTopSpeed(int speed);
     void setLocation(float x, float y);
     void setMass(float _mass);

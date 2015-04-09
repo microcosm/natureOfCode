@@ -26,6 +26,14 @@ void Mover::applyForce(ofVec2f force) {
     acceleration += force / mass;
 }
 
+void Mover::applyGravity(ofVec2f force) {
+    //The force of gravity is applied to objects via weight,
+    //measured in newtons. Weight = mass * gravity.
+    acceleration += (force * mass) / mass;
+    //Isn't this equivalent to
+    //acceleration += force; ??
+}
+
 void Mover::setTopSpeed(int speed) {
     topspeed = speed;
 }
