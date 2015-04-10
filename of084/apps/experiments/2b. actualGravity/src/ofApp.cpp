@@ -71,6 +71,7 @@ void ofApp::setupExp1() {
 
 void ofApp::drawExp1() {
     for(int i = 0; i < numMovers; i++) {
+        //Note - applyForce
         movers.at(i).applyForce(gravity);
         movers.at(i).update();
         movers.at(i).draw();
@@ -112,6 +113,7 @@ void ofApp::setupExp2() {
 
 void ofApp::drawExp2() {
     for(int i = 0; i < numMovers; i++) {
+        //Note - applyGravity
         movers.at(i).applyGravity(gravity);
         movers.at(i).update();
         movers.at(i).draw();
