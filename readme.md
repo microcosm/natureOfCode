@@ -1,6 +1,6 @@
 Nature of Code / openFrameworks
 ===============================
-Concepts and ideas from Daniel Shiffman's amazing book, written in openFrameworks.
+Concepts and ideas from Daniel Shiffman's amazing book, written in openFrameworks (0.8.4).
 
 ![The book](book.jpg)
 
@@ -18,8 +18,16 @@ This repo is my response to reading the book - study notes and experiments. It's
 
 How to use this repo
 --------------------
-At the root there is a .java file for each chapter in the book, with what I thought were the salient points worth noting down and playing with.
+The root folder contains commented Java files from each chapter of the book, demonstrating salient points and listing the algorithms. In the folder [of084/apps/experiments](of084/apps/experiments) you will find the algorithms converted to openFrameworks and riddled with my experimentation.
 
-openFrameworks forces you to use a certain directory structure, so I just included the entire openFrameworks 0.8.3 distribution. You should be able to easily clone the repo and launch the examples, if you own a Mac with Xcode anyway.
+Because openFrameworks forces you to use a certain directory structure, I just included the entire openFrameworks 0.8.4 distribution in my repo. You should be able to easily clone the repo and launch the examples, if you own a Mac with Xcode anyway.
 
-To see the oF code, navigate to [of083/apps/experiments](of083/apps/experiments), or just use the 'experiments' symlink to jump straight in there.
+Tested with Xcode 6.0.1.
+
+Note on submodules
+------------------
+This repo uses [git submodules](http://git-scm.com/book/en/v2/Git-Tools-Submodules) to refer to addon dependencies. You can read about them, or if you just wanted to get running quickly, use:
+
+    git clone --recursive https://github.com/microcosm/natureOfCode.git
+
+...and you will get everything you need to start.
