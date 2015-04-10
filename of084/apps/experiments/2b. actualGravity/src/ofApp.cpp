@@ -54,7 +54,7 @@ void ofApp::setupExp1() {
         maxWeight = ofGetWidth() * 0.025;
         
         x = ofRandom(minX, maxX);
-        y = 0.5;
+        y = ofMap(0.25, 0, 1, 0, ofGetHeight());
         weight = ofRandom(minWeight, maxWeight);
         
         color = ofColor::fromHsb(ofRandom(0, 255), 255, 255);
@@ -96,7 +96,7 @@ void ofApp::setupExp2() {
         maxWeight = ofGetWidth() * 0.025;
         
         x = ofRandom(minX, maxX);
-        y = 0.5;
+        y = ofMap(0.25, 0, 1, 0, ofGetHeight());
         weight = ofRandom(minWeight, maxWeight);
         
         color = ofColor::fromHsb(ofRandom(0, 255), 255, 255);
