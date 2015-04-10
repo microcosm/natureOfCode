@@ -1,0 +1,3 @@
+[submodule "of084/addons/ofxAnimatable"]
+	path = of084/addons/ofxAnimatable
+	url = https://github.com/armadillu/ofxAnimatable.git
