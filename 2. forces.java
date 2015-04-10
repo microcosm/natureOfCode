@@ -153,7 +153,7 @@ You don't have to copy the real world. Here's what we're trying to learn how to 
    - How do we compute the force's magnitude?
 - Translate that formula into Processing code that calculates a PVector to be sent through our Mover's applyForce() function
 
-Let's do this with gravity and fiction, then hopefully if you ever find yourself Googling "atomic nuclei weak nuclear force" at 3 a.m., you will have the skills to take what you find and adapt it for Processing
+Let's do this with gravity and friction, then hopefully if you ever find yourself Googling "atomic nuclei weak nuclear force" at 3 a.m., you will have the skills to take what you find and adapt it for Processing
 
 Deconstructing Formulae
 =======================
@@ -170,6 +170,9 @@ Friction = -1 * u * N * v
 -1  points in opposite direction to velocity
 u   (mu) coefficient of friction. e.g. block of ice vs sandpaper
 N   the 'normal' force - calculated by reference to gravity, but not necessarily pointing in the same direction as gravity - for now let's use a constant 1
+^
+v   is the unit vector for velocity (velocity normalized - the ^ means it's a unit vector)
+(See the diagram in section 2.7!)
 */
   float coefficient = 0.01;
   float normal = 1;
@@ -183,10 +186,10 @@ N   the 'normal' force - calculated by reference to gravity, but not necessarily
 
     for(int i = 0; i < movers.length; i++) {
       PVector friction = movers[i].velocity.get();
-      friction.mult(-1);
       friction.normalize();
-      friction.mult(normal);
+      friction.mult(-1);
       friction.mult(coefficient);
+      friction.mult(normal);
 
       movers[i].applyForce(friction);
       movers[i].applyForce(wind);
